@@ -1,0 +1,14 @@
+.dividir{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form2 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#pesquisar, #tipo_pesquisa {
+    flex: 1;
+}
