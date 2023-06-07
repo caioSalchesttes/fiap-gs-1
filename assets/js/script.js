@@ -11,8 +11,6 @@ class DataManager {
         document.getElementById("pesquisar").addEventListener("keyup", (e) => {
             this.searchCards(e.target.value);
         });
-
-        // Attach more event listeners here...
     }
 
     saveData() {

@@ -1,25 +1,35 @@
-let dados = JSON.parse(localStorage.getItem("item")) || [];
+class DataManager {
+    constructor() {
+        this.dados = JSON.parse(localStorage.getItem("item")) || [];
+        this.modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
-let consumoAno = document.getElementById("consumoAno");
-let consumoMes = document.getElementById("consumoMes");
-
-let consumoAnoTotal = 0;
-let consumoMesTotal = 0;
-
-let currentMonth = new Date().getMonth() + 1;
-let currentYear = new Date().getFullYear();
-
-dados.forEach((item, index) => {
-    let inputValue = item.date;
-    let parts = inputValue.split('-');
-    if (parts[0] == currentYear) {
-        consumoAnoTotal += parseInt(item.amount);
-        console.log(currentMonth)
-        if (parts[1] == currentMonth) {
-            consumoMesTotal += parseInt(item.amount);
-        }
+        this.attachEventListeners();
+        this.renderData();
+        this.calculateConsumption();
     }
-});
 
-consumoAno.innerHTML = `Consumo Total no Ano: ${consumoAnoTotal}L`;
-consumoMes.innerHTML = `Consumo Total no Mês: ${consumoMesTotal}L`; 
+    calculateConsumption() {
+        let currentMonth = new Date().getMonth() + 1;
+        let currentYear = new Date().getFullYear();
+
+        let totalConsumptionYear = 0;
+        let totalConsumptionMonth = 0;
+
+        this.dados.forEach((item) => {
+            let parts = item.date.split('-');
+
+            if (parts[0] == currentYear) {
+                totalConsumptionYear += parseInt(item.amount);
+                
+                if (parts[1] == currentMonth) {
+                    totalConsumptionMonth += parseInt(item.amount);
+                }
+            }
+        });
+
+        document.getElementById("consumoAno").innerHTML = `Consumo Total no Ano: ${totalConsumptionYear}L`;
+        document.getElementById("consumoMes").innerHTML = `Consumo Total no Mês: ${totalConsumptionMonth}L`;
+    }
+}
+
+window.dataManager = new DataManager();
