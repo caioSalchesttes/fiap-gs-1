@@ -83,11 +83,6 @@ class DataManager {
         localStorage.setItem("item", JSON.stringify(this.dados));
         this.renderData();
     }
-
-    approveData(id) {
-        this.dados = this.dados.map((item) => item.id === id ? {...item, status: "Aprovado"} : item);
-        this.renderData();
-    }
 }
 
 window.dataManager = new DataManager();
