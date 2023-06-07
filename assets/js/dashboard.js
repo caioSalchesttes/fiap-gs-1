@@ -1,10 +1,6 @@
 class DataManager {
     constructor() {
         this.dados = JSON.parse(localStorage.getItem("item")) || [];
-        this.modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-
-        this.attachEventListeners();
-        this.renderData();
         this.calculateConsumption();
     }
 
